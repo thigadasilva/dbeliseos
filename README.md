@@ -9,7 +9,7 @@ Aqui estão os passos para executar o programa:
 
 1. Instale o JDK: Certifique-se de que você tem o JDK instalado no seu computador. Você pode baixá-lo no site oficial da Oracle.
 2. Crie um projeto Java: Abra sua IDE e crie um novo projeto Java.
-3. Adicione o driver JDBC do MySQL: Baixe o driver JDBC do MySQL no site oficial do MySQL e adicione-o ao seu projeto. Isso pode variar dependendo da sua IDE.
+3. Adicione o driver JDBC do MySQL: Baixe o driver JDBC do MySQL no site oficial do MySQL e adicione-o ao seu projeto ou adicione o driver JDBC do mySQL disponibilizado no próprio repositório. Isso pode variar dependendo da sua IDE.
 4. Copie o código: Copie o código fornecido e cole-o em uma classe Java no seu projeto.
 5. Configure as credenciais do banco de dados: Certifique-se de que as credenciais do banco de dados (host, porta, nome do banco, usuário e senha) estejam corretas.
 6. Execute o programa: Execute o programa clicando no botão de execução da sua IDE ou usando o comando java no terminal.
