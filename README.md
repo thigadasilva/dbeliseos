@@ -21,10 +21,6 @@ Se tudo estiver configurado corretamente, o programa criará as tabelas e inseri
 - Certifique-se de que o banco de dados MySQL esteja configurado para aceitar conexões remotas e que as credenciais sejam válidas.
 - Se você estiver usando uma versão mais recente do MySQL, pode ser necessário ajustar a string de conexão para incluir parâmetros adicionais de segurança.
 - Lembre-se de que a senha do banco de dados está hardcoded no código, o que não é recomendado para produção. Em um ambiente de produção, você deve usar uma forma segura de armazenar e gerenciar credenciais.
-@AI
-Parece que você não digitou nada! Se você precisar de ajuda com algo relacionado ao código Java ou ao banco de dados MySQL, basta perguntar. Estou aqui para ajudar! Se você tiver alguma dúvida ou precisar de mais informações sobre como executar o programa, sinta-se à vontade para perguntar.
-@AI inclua a explicação da conexão banco de dados e Intelij no Aiven
-Aqui está uma explicação mais detalhada sobre como executar o programa, incluindo a conexão com o banco de dados no Aiven e configurando o IntelliJ:
 
 # Conexão com o Banco de Dados no Aiven
 
