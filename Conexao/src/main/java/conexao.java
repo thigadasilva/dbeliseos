@@ -247,7 +247,7 @@ public class conexao {
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, descricao);
         ps.setString(2, local);
-                ps.setString(2, local);
+        ps.setString(2, local);
         ps.setDate(3, Date.valueOf(data));
         ps.setInt(4, id);
         int r = ps.executeUpdate();
@@ -264,6 +264,7 @@ public class conexao {
         System.out.println(r > 0 ? "Treinamento deletado." : "Erro na exclusão.");
     }
 
+    // ---------- CRUD AULA ----------
     // ---------- CRUD AULA ----------
     private static void crudAula() throws SQLException {
         System.out.println("\nCRUD AULA");
@@ -283,18 +284,21 @@ public class conexao {
     }
 
     private static void inserirAula() throws SQLException {
-        System.out.print("Nome da aula: ");
-        String nome = sc.nextLine();
+        System.out.print("ID do cavaleiro: ");
+        int cavaleiro_id = Integer.parseInt(sc.nextLine());
         System.out.print("ID do mestre: ");
         int mestre_id = Integer.parseInt(sc.nextLine());
         System.out.print("ID do treinamento: ");
         int treinamento_id = Integer.parseInt(sc.nextLine());
+        System.out.print("Resultado: ");
+        String resultado = sc.nextLine();
 
-        String sql = "INSERT INTO Aula(nome, mestre_id, treinamento_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Aula(cavaleiro_id, mestre_id, treinamento_id, resultado) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, nome);
+        ps.setInt(1, cavaleiro_id);
         ps.setInt(2, mestre_id);
         ps.setInt(3, treinamento_id);
+        ps.setString(4, resultado);
         int r = ps.executeUpdate();
         System.out.println(r > 0 ? "Aula inserida com sucesso." : "Erro ao inserir aula.");
     }
@@ -303,27 +307,30 @@ public class conexao {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Aula");
         while (rs.next()) {
-            System.out.printf("ID: %d | Nome: %s | Mestre ID: %d | Treinamento ID: %d%n",
-                    rs.getInt("id"), rs.getString("nome"), rs.getInt("mestre_id"), rs.getInt("treinamento_id"));
+            System.out.printf("ID: %d | Cavaleiro ID: %d | Mestre ID: %d | Treinamento ID: %d | Resultado: %s%n",
+                    rs.getInt("id"), rs.getInt("cavaleiro_id"), rs.getInt("mestre_id"), rs.getInt("treinamento_id"), rs.getString("resultado"));
         }
     }
 
     private static void atualizarAula() throws SQLException {
         System.out.print("ID da aula a atualizar: ");
         int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Novo nome da aula: ");
-        String nome = sc.nextLine();
+        System.out.print("Novo ID do cavaleiro: ");
+        int cavaleiro_id = Integer.parseInt(sc.nextLine());
         System.out.print("Novo ID do mestre: ");
         int mestre_id = Integer.parseInt(sc.nextLine());
         System.out.print("Novo ID do treinamento: ");
         int treinamento_id = Integer.parseInt(sc.nextLine());
+        System.out.print("Novo resultado: ");
+        String resultado = sc.nextLine();
 
-        String sql = "UPDATE Aula SET nome = ?, mestre_id = ?, treinamento_id = ? WHERE id = ?";
+        String sql = "UPDATE Aula SET cavaleiro_id = ?, mestre_id = ?, treinamento_id = ?, resultado = ? WHERE id = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, nome);
+        ps.setInt(1, cavaleiro_id);
         ps.setInt(2, mestre_id);
         ps.setInt(3, treinamento_id);
-        ps.setInt(4, id);
+        ps.setString(4, resultado);
+        ps.setInt(5, id);
         int r = ps.executeUpdate();
         System.out.println(r > 0 ? "Aula atualizada." : "Erro na atualização.");
     }
@@ -338,6 +345,7 @@ public class conexao {
         System.out.println(r > 0 ? "Aula deletada." : "Erro na exclusão.");
     }
 
+    // ---------- CRUD EVOLUCAO ----------
     // ---------- CRUD EVOLUCAO ----------
     private static void crudEvolucao() throws SQLException {
         System.out.println("\nCRUD EVOLUCAO");
@@ -357,18 +365,21 @@ public class conexao {
     }
 
     private static void inserirEvolucao() throws SQLException {
-        System.out.print("Descrição da evolução: ");
-        String descricao = sc.nextLine();
         System.out.print("ID do cavaleiro: ");
         int cavaleiro_id = Integer.parseInt(sc.nextLine());
-        System.out.print("ID da aula: ");
-        int aula_id = Integer.parseInt(sc.nextLine());
+        System.out.print("Nível antigo: ");
+        int nivel_antigo = Integer.parseInt(sc.nextLine());
+        System.out.print("Nível novo: ");
+        int nivel_novo = Integer.parseInt(sc.nextLine());
+        System.out.print("Data (YYYY-MM-DD): ");
+        String data = sc.nextLine();
 
-        String sql = "INSERT INTO Evolucao(descricao, cavaleiro_id, aula_id) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Evolucao(cavaleiro_id, nivel_antigo, nivel_novo, data) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, descricao);
-        ps.setInt(2, cavaleiro_id);
-        ps.setInt(3, aula_id);
+        ps.setInt(1, cavaleiro_id);
+        ps.setInt(2, nivel_antigo);
+        ps.setInt(3, nivel_novo);
+        ps.setDate(4, Date.valueOf(data));
         int r = ps.executeUpdate();
         System.out.println(r > 0 ? "Evolução inserida com sucesso." : "Erro ao inserir evolução.");
     }
@@ -377,27 +388,30 @@ public class conexao {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Evolucao");
         while (rs.next()) {
-            System.out.printf("ID: %d | Descrição: %s | Cavaleiro ID: %d | Aula ID: %d%n",
-                    rs.getInt("id"), rs.getString("descricao"), rs.getInt("cavaleiro_id"), rs.getInt("aula_id"));
+            System.out.printf("ID: %d | Cavaleiro ID: %d | Nível Antigo: %d | Nível Novo: %d | Data: %s%n",
+                    rs.getInt("id"), rs.getInt("cavaleiro_id"), rs.getInt("nivel_antigo"), rs.getInt("nivel_novo"), rs.getDate("data").toString());
         }
     }
 
     private static void atualizarEvolucao() throws SQLException {
         System.out.print("ID da evolução a atualizar: ");
         int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Nova descrição da evolução: ");
-        String descricao = sc.nextLine();
-        System.out.print("Novo ID do cavaleiro: ");
+        System.out.print("ID do cavaleiro: ");
         int cavaleiro_id = Integer.parseInt(sc.nextLine());
-        System.out.print("Novo ID da aula: ");
-        int aula_id = Integer.parseInt(sc.nextLine());
+        System.out.print("Nível antigo: ");
+        int nivel_antigo = Integer.parseInt(sc.nextLine());
+        System.out.print("Nível novo: ");
+        int nivel_novo = Integer.parseInt(sc.nextLine());
+        System.out.print("Data (YYYY-MM-DD): ");
+        String data = sc.nextLine();
 
-        String sql = "UPDATE Evolucao SET descricao = ?, cavaleiro_id = ?, aula_id = ? WHERE id = ?";
+        String sql = "UPDATE Evolucao SET cavaleiro_id = ?, nivel_antigo = ?, nivel_novo = ?, data = ? WHERE id = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, descricao);
-        ps.setInt(2, cavaleiro_id);
-        ps.setInt(3, aula_id);
-        ps.setInt(4, id);
+        ps.setInt(1, cavaleiro_id);
+        ps.setInt(2, nivel_antigo);
+        ps.setInt(3, nivel_novo);
+        ps.setDate(4, Date.valueOf(data));
+        ps.setInt(5, id);
         int r = ps.executeUpdate();
         System.out.println(r > 0 ? "Evolução atualizada." : "Erro na atualização.");
     }
